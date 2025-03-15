@@ -10,11 +10,18 @@ namespace ProjektPlecakowy
     {
         public int Waga { get; set; }
         public int Wartosc { get; set; }
-        public Przedmiot(int waga, int wartosc)
+        public int Indeks { get; set;}
+        public Przedmiot(int waga, int wartosc, int indeks)
         {
             Waga = waga;
             Wartosc = wartosc;
+            Indeks = indeks;
+            
         }
+        public override string ToString()
+    {
+        return $"[#{Indeks}] Waga: {Waga}, Wartość: {Wartosc}";
+    }
     }
 
     

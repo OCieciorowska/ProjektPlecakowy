@@ -20,34 +20,31 @@ namespace ProjektPlecakowy
             {
                 int waga = random.Next(1, 11);
                 int wartosc = random.Next(1, 11);
-                Przedmioty.Add(new Przedmiot(waga, wartosc));
+                Przedmioty.Add(new Przedmiot(i + 1, waga, wartosc)); // Indeks = i+1
             }
         }
-        public Result Solve(int capacity)
+ public Result Solve(int capacity)
         {
-            var sortedItems = Przedmioty.OrderByDescending(p=>(double)p.Wartosc/p.Waga).ToList();
-            List<int> selectedItems = new List<int>();
+            var sortedItems = Przedmioty.OrderByDescending(p => (double)p.Wartosc / p.Waga).ToList();
+            List<int> selectedIndices = new List<int>();
             int totalWeight = 0, totalValue = 0;
-            for(int i=0;i<sortedItems.Count;i++)
+
+            foreach (var item in sortedItems)
             {
-                if (totalWeight + sortedItems[i].Waga<=capacity)
+                if (totalWeight + item.Waga <= capacity)
                 {
-                    selectedItems.Add(i);
-                    totalWeight += sortedItems[i].Waga;
-                    totalValue += sortedItems[i].Wartosc;
+                    selectedIndices.Add(item.Indeks);  // Zapamiętujemy oryginalny indeks przedmiotu
+                    totalWeight += item.Waga;
+                    totalValue += item.Wartosc;
                 }
             }
-            return new Result(selectedItems, totalValue, totalWeight);
-        }
-        public override string ToString()
-        {
-            string result = "Lista przedmiotow:\n";
-            for(int i=0; i<Przedmioty.Count;i++)
-            {
-                result += $"Przedmiot{i+1}: Waga= {Przedmioty[i].Waga}, Wartosc={Przedmioty[i].Wartosc}\n"; 
-            }
-            return result;
+
+            return new Result(selectedIndices, totalValue, totalWeight);
         }
 
+        public override string ToString()
+        {
+            return "Lista przedmiotów:\n" + string.Join("\n", Przedmioty);
+        }
     }
 }
