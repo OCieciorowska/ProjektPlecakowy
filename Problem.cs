@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.CompilerServices;
 
-namespace ProjektPlecakowy
-{
+
+namespace ProjektPlecakowy {
     internal class Problem
     {
        public int LiczbaN { get; set; }
@@ -20,7 +21,7 @@ namespace ProjektPlecakowy
             {
                 int waga = random.Next(1, 11);
                 int wartosc = random.Next(1, 11);
-                Przedmioty.Add(new Przedmiot(i + 1, waga, wartosc)); // Indeks = i+1
+                Przedmioty.Add(new Przedmiot(i + 1, waga, wartosc)); 
             }
         }
  public Result Solve(int capacity)
@@ -36,6 +37,8 @@ namespace ProjektPlecakowy
                     selectedIndices.Add(item.Indeks);  // Zapamiętujemy oryginalny indeks przedmiotu
                     totalWeight += item.Waga;
                     totalValue += item.Wartosc;
+                    
+                    //selectedIndices.Add(item.Indeks);
                 }
             }
 
