@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.CompilerServices;
+[assembly: InternalsVisibleTo("TestProjectPlecakowy")]
+
 
 namespace ProjektPlecakowy
 {
@@ -20,24 +23,25 @@ namespace ProjektPlecakowy
             {
                 int waga = random.Next(1, 11);
                 int wartosc = random.Next(1, 11);
-                Przedmioty.Add(new Przedmiot(waga, wartosc));
+                Przedmioty.Add(new Przedmiot(i+1, waga, wartosc));
             }
         }
         public Result Solve(int capacity)
         {
             var sortedItems = Przedmioty.OrderByDescending(p=>(double)p.Wartosc/p.Waga).ToList();
-            List<int> selectedItems = new List<int>();
+            List<int> selectedIndices = new List<int>();
             int totalWeight = 0, totalValue = 0;
-            for(int i=0;i<sortedItems.Count;i++)
+            
+            foreach(var item in sortedItems)
             {
-                if (totalWeight + sortedItems[i].Waga<=capacity)
+                if (totalWeight + item.Waga<=capacity)
                 {
-                    selectedItems.Add(i);
-                    totalWeight += sortedItems[i].Waga;
-                    totalValue += sortedItems[i].Wartosc;
+                    selectedIndices.Add(item.Indeks);
+                    totalWeight +=item.Waga;
+                    totalValue += item.Wartosc;
                 }
             }
-            return new Result(selectedItems, totalValue, totalWeight);
+            return new Result(selectedIndices, totalValue, totalWeight);
         }
         public override string ToString()
         {

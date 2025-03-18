@@ -8,10 +8,12 @@ namespace ProjektPlecakowy
 {
     internal class Przedmiot
     {
+        public  int Indeks { get; set; }
         public int Waga { get; set; }
         public int Wartosc { get; set; }
-        public Przedmiot(int waga, int wartosc)
+        public Przedmiot( int indeks, int waga, int wartosc)
         {
+            Indeks = indeks;
             Waga = waga;
             Wartosc = wartosc;
         }
