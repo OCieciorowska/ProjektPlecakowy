@@ -20,8 +20,8 @@ namespace ProjektPlecakowy
         }
         public override string ToString()
         {
-            return $"Wybrane przedmioty: {string.Join(", ", SelectedItems)}\n" +
-                   $"Łączna wartość: {TotalValue}, Łączna waga: {TotalWeight}";
+            return $"Wybrane przedmioty:{string.Join(",", SelectedItems)}\n łączna wartosc:{TotalValue}\n łączna waga:{TotalWeight}";
+
         }
 
 
